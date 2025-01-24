@@ -1,0 +1,880 @@
+Machine learning notes :
+
+What is ML ? 
+machine learning plays crucial role in data science. it is branch of artificial intelligence which focuses on developing algorithm and models
+so that computer can analyze, learn and make predictions based on deterministic part of data without explicit programing 
+
+data = deterministic + random 
+
+the main function of ML model is to capture deterministic part of data.
+
+
+Steps in ML :
+1.data collection : collect the data from various sources 
+2.data preparation : transform and prepare the data for further analysis
+3.model selection : select the appropriate model based on the data to make prediction
+4.Data training : train the data on selected model
+5.performance evaluation : evaluate the performance of model.
+6.Hyperparameter tunning and cross validation : if the model performance is not up to the mark then perform hyperparameter tunning and cross validation to improve its performance
+7.prediction : Make predictions or decisions.
+
+
+Type of ML Algorithms :
+1.supervised learning algorithm
+2.unsupervised learning algorithm 
+3.semisupervised learning algorithms
+4.reinforcement learning algorithms 
+
+
+1. Supervised learning algorithms: 
+In supervised learning, the algorithm are learned from the labelled data to make predictions or decision. where dependent or target variable is already present in the data.
+
+2. unsupervised learning : 
+In unsupervised learning , the algorithms are learned from the unlabeled data where the task is to analyze pattern or relation or structure in a data 
+to make predictions or decision.
+
+
+# Type of supervised learning :
+1.Regression and classification 
+
+In regression , Target variable is numeric and continuous 
+In classification , Target variable is categorical and discrete.
+
+
+1.regression : 
+  1. linear regression
+  2. lasso regression 
+  3. ridge regression
+  4. elastic net regression 
+
+-------------------------------------------
+---------------------------------------------------------------
+----------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------z
+
+
+
+LINEAR REGRESSION : 
+
+1. most basic type of regression in the supervised Machine learning
+2. Where the dependent variable and independent variable are linear to each other
+3. It is also known as ordinary least square or linear least square.
+
+
+equation : B0 + B1x1 + B2x2 -----+Bnxn
+
+where B0 = intercept
+B1,B2,---Bn = model parameters or coefficients.
+x1,x2,x3 = features or variable or columns 
+Y" = predicted output
+Y = actual output
+
+Main goal of linear regression is to find the best fit line or regression line.
+
+Best fit line is the line for which the error between predicted value and observe value (actual value) is minimum.
+best fit line is also known as regression line and error is called residue. 
+
+the vertical error between predicted value and actual value from Best fit line is called prediction error.
+
+so basically the main function of Linear regression is to minimize the error or residue to get the best fit line or regression line
+
+
+Error = Sum squared error = sumation(Y-Y")2 for i =1 to i = n   
+
+MSE = Mean square error = 1/n sumation(Y-Y")2 for i =1 to i = n   
+
+
+to minimize the SSE we use different B value and the value which gives minimum SSE will produce best fit line and is called best possible value.
+
+there are 2 method to find out the minimum error 
+1.normal equation method  : Normal equation method gives minimum value of error in single shot 
+2.gradient decent algorithm : while gradient descent gives the minimum value of error using repeated steps
+
+
+Assumption of linear regression : 
+1.Relationship between independent and dependent variable should be linear : 
+we can check the linearity or relationship between independent and dependent variable using correlation matrix and also by visualizing it using scatter plot. there should be a linear relationship , it might be either positive or negative no matter but there should be a linearity 
+
+2.Multicollinearity should not be there in regression model : Multicollinearity occurs when Independent variables are highly correlated to each other. we can also check this using correlation matrix. 
+3.Homoscedacity in the regression model is must
+
+
+Homoscedasticity : - same variance ----->  error term is same across all value of independent variable
+Heteroscedasticity : - different variance ------>  error term is different across all value of independent variable
+to deal with heteroscedasticity we need to transform the data , like log transformation , outliers treatment, etc.
+
+Effects of Multicollinearity:
+Unstable Coefficient Estimates: Multicollinearity can cause the estimated regression coefficients to become highly sensitive to small changes in the model. This means that adding or removing a variable can lead to large fluctuations in coefficient values, making it difficult to determine the true effect of each predictor on the dependent variable
+
+Increase standard error : As multicollinearity leads to large fluctuations in coefficient values. it increase the error value and includes overfitting of the model. 
+
+for an instance we can say that while calculating house price , there are two features number of rooms and square feet area, as we know higher the number of room higher the square feet area, so they are highly correlated and there is multicollinearity , they provide similar information about the price of house, It becomes challenging to determine the individual effect of each feature on house prices since both are contributing similar information. you can consider removing one of them from the model. For instance, you might choose to keep either the number of rooms or square footage, but not both.
+By doing so, you simplify the model and reduce multicollinearity, allowing for more reliable coefficient estimates and clearer interpretations.
+
+to detect multicollinearity : calculate VIF 
+if VIF = 1 then no correlation 
+if VIF > 1 and VIF < 5 then moderate
+if VIF > 10 then high correlation 
+
+
+if there is multicollinearity in the model then we need to drop the features or variable who is more correlated or we need to do feature engineering to create a new feature from existing feature.
+
+#Properties of regression line : 
+1. Regression line always passed through mean of independent variable as well as mean of dependent variable.
+
+----------------------------------------
+
+#Underfitting : (high bias and low variance )
+Underfitting occurs when model is to simple to capture underlying patterns in data, resulting in poor performance on both training and testing data
+basically underfitting occurs when model doesn't capture relationship in data
+
+Sign of underfitting :
+low accuracy on training and testing data 
+
+Causes of underfitting : 
+model is too simple 
+less training time  or insufficient training time 
+ignoring important features
+
+overcome underfitting : 
+try using more complex model
+add more features
+increase training time
+
+
+#Overfitting :(Low bias and High variance)
+Overfitting occurs when model is to complex and it captures noise or fluctuations in the training data rather than learning true underlying patterns
+as a result it perform good on training but fail to perform good on testing 
+
+
+sign of overfitting :
+High accuracy on training 
+low accuracy on testing
+
+causes : 
+model is tooo complex 
+model has many features 
+high coefficient values 
+
+overcome overfitting : 
+use regularization technique such as lasso and ridge which minimizes the coefficient and reduce overfitting 
+reduce complexity of model 
+
+----------------------------------------
+
+Understanding bias and variance : 
+
+Bias : Bias in machine learning refers to the systematic error that occurs when a model makes incorrect assumptions about the data, leading to inaccurate predictions.
+
+example : Imagine you are trying to predict the price of houses based solely on their square footage. If you assume that all houses are priced linearly based on size without considering other factors like location, age, or amenities, your model may not accurately reflect reality. This oversimplification leads to high bias, meaning the model fails to capture the true relationship between house prices and their features.
+and hence underfitting . (fails to capture underlying pattern in data when model is too simple) 
+
+Variance : It essentially measures how sensitive the model is to fluctuations in the training data.The model captures noise and fluctuations, leading to overfitting (good performance on training data but poor generalization).
+
+Example : When you train this complex model on your house data:
+It learns the prices of all the houses in your training set very accurately. For example, if a house with 1,500 sq ft sold for $250,000, the model remembers that exactly.
+It may also pick up on some unusual patterns or outliers. For instance, if there was one house that sold for $500,000 because it had a swimming pool and was in a great location, the model might think all similar-looking houses should also be priced similarly.
+Good Performance on Training Data:
+When you check how well it predicts prices for the training data, it does an amazing job—almost perfect predictions!
+Poor Performance on Test Data:
+However, when you use this model on new houses (the test set), it performs poorly. For example:
+If a new house with 1,600 sq ft and no special features is listed for $250,000, your model might predict it at $400,000 because it overemphasizes the unusual features it learned from the training data.
+
+
+As we know as the model complexity increases the chances of overfitting also increases.
+to overcome overfitting , we use lasso and ridge regression which takes care overfitting due to high value of coefficient and outliers.
+penalty term decrease the coefficient value to 0 or up to 0
+lasso = L1 regularization technique   ---- reduced coefficient value to 0 and remove from dataset
+Ridge = L2 regularization technique   ---- reduced coefficient value up to 0 not exactly zero
+
+------------------------------------------------
+
+Cross validation and Hyperparameter tunning : 
+when model is not performing good or the performance of the model is not up to the mark in that case we need to do cross validation and hyperparameter tunning 
+
+
+Cross validation : 
+for large dataset we have sufficient data to split into train and test the model, so we can train good and test good. no need of cross validation 
+
+for the small dataset with limited data, cross validation is crucial , which allows you to repeatedly train and test your model on different subset of data.
+
+Cross validation is a technique to split the data into subset of k fold where we train the data on kn folds and test the data on remaining folds. cross validation allows you to train and test the model repeatedly 
+
+Hyperparameter tunning : 
+hyperparameter tunning involves finding the best combination of hyperparameters that leads to optimal model performance.
+we have GridSearchCV and RandomSearchCV
+
+performance evaluation of linear regression :
+1. Mean square error  : Calculating both provides insights into model performance; MSE emphasizes larger errors due to squaring, while RMSE provides error in original units 
+2. root mean square error
+3. mean absolute error : 
+4. root absolute percentage error
+5. R2   : R-squared indicates how well data points fit a statistical model. it measures the proportion of variation in the dependent variable explained by independent variable
+
+6. Adjusted R square : Adjusted R-squared adjusts R-squared for the number of predictors in a model, providing a more accurate measure when comparing models with different numbers of predictors.
+
+
+Acceptable Values for Errors
+Generally, lower values for all error metrics indicate better model performance.
+
+For instance:
+MSE and RMSE should ideally approach zero.
+
+R-squared values range from 0 to 1, with higher indicating better fit.
+
+MAE and MAPE should also be minimized for optimal predictions.
+
+
+
+
+
+----------------------          ------------------         ----------------------          ------------------------------------   ----------------------
+
+
+---------------------        ---------------------------------                  --------------------------------          ---------------------------------
+
+Classification algorithms : 
+
+---------------------------
+
+LOGISTIC REGRESSION : only classification
+
+1.logistic regression is a type of supervised learning algorithm belongs to classification problem. where the target variable is a categorical column and have only 2 values (yes-no , true-false) etc. and hence it is called dichotomous variable.
+As the target variable is having only 2 values hence called as binary classification algorithm.
+
+2.althought the target variable contains categorical values still we called it as Logistic REGRESSION , because we are going to assign a numerical value to target variable 
+
+3.we know 
+linear regression equation is , 
+y'' = b0 + b1x1 + b2x2 + b3x3.......+bnxn
+
+now for the logistic regression , logistic function is 
+
+p = 1 / 1+e'-mtx
+
+where mtx = b0 + b1x1 + b2x2 + b3x3
+
+4. now when we plot the logistic function , we get a sigmoid curve which states that at x=0 p = 0.5 
+as value of x increases the p also increases
+as value of x decreases the p also decreases. 
+
+at any value of x the p will be lies between 0 to 1
+
+
+#Assumption of logistic regression 
+1. dependent variable should be dichotomous 
+2. multicollinearity should not be there in the model (Independent variable should not be highly correlated to each other)
+
+
+5. performance evaluation of logistic regression includes
+a. accuracy = correctly predicted / total number of data points
+b. precision = true positive / predicted positive
+c. recall = true positive / actual positive
+d. f1_score = harmonic mean of precision and recall i.e 1/precision + 1/recall
+e. log_loss = higher log loss _ bad fit
+             lower log_loss _ best fit
+
+AUC : Area under curve
+ROC : Receiver operator characteristics
+
+
+to calculate this metrics we need to calculate confusion matrix.
+
+what is confusion matrix :
+A confusion matrix is a crucial tool in machine learning, particularly for evaluating the performance of classification models. It provides a detailed breakdown of the correct and incorrect predictions made by the model.
+
+
+AUS ROC Curve : 
+AUC ROC curve is essential tool for evaluating the performance of logistic regression model
+
+ROC plots true positive rate(Recall) against false positive rate 
+
+
+AUC : Overall ability of model to classify positive and negative classes.
+auc ranges between 0 to 1
+1 : perfect classification 
+0.5 =  moderate classification 
+below 0.5 = poor classification or
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+----------------------------------------------------------------------------------------------------------------
+
+
+DECISION TREE : both classification and regression task
+
+decision tree is supervised learning algorithm used for both classification and regression task. 
+the tree used for classification task is called classification tree and tree used for regression task is called regression tree. 
+
+classification task : 
+target variable is categorical and discrete
+classification tree classify the target variable into different classes 
+
+
+regression task : 
+target variable is numerical or continuous
+regression tree is used to predict the value of target variable 
+
+-------
+
+the structure of decision tree includes ;
+
+1. root node : it is a starting node of decision tree. root node represent entire population and gets divided into two or more homogeneous subset
+
+2. decision node : the sub node which gets divided into further sub node bases on specific feature or specific condition then it is called decision node. 
+decision node is also called as internal , intermittent node
+
+3. leaf node : the node which do not splits into sub node is called leaf node. leaf node also called as terminal node where decision or prediction made.
+
+4. branch or subtree : it is part of tree or sub section of decision tree
+
+5. Parent and child node : the node which splits into sub node is called parent node and the sub node is called child node of parent node
+
+6. pruning : pruning is a technique to reduce the size of tree by removing branches or sub tree which do not contribute more in improving the accuracy of prediction. pruning helps to prevent overfitting
+
+----------
+
+Entropy : a measure of randomness or impurity in data is called entropy . higher the entropy higher the randomness in data , less the homogenous data or heterogeneous data 
+lower the entropy , lower the randomness in data , data is more homogeneous 
+
+formula : 
+Entropy = -plog2p -qlog2q
+
+
+-----------
+Information gain : 
+
+1.information gain measures how much the information a particular feature provides about class label. 
+2.information gain measures reduction in entropy after splitting the data based on particular feature 
+
+higher the IG ------> higher the reduction in entropy -------> Data is more homogeneous
+lower the IG --------> Lower the reduction in entropy -------> Data is heterogenous
+
+the feature which is more homogeneous is best suited for the split 
+
+-----------
+
+Steps to calculate IG : 
+1. calculate entropy of entire dataset based on the value in target variable 
+
+total entropy s(total)  = -plog2p -qlo2q
+
+where 
+p = probability of class A 
+q = probability of class B or probability of not class A
+
+
+suppose there are 100 rows out of which 70 is yes and 30 is no
+then 
+p = 70 / 100  - 0.7 
+q = 30 / 100  - 0.3
+
+
+2. calculate entropy of each individual node of split 
+i.e feature is gender and have 2 value male and female
+entropy of female 
+entropy of male 
+
+suppose there are 30 female and 70 male 
+
+entropy of female ; 
+no of female = 30 
+female (yes) = 10
+female (no ) = 20 
+
+
+then 
+p(female yes) = 10/30 
+p(female no ) = q = 20 / 30 
+
+entropy of female = -plog2p -1log2q
+
+
+similarly 
+entropy of male :
+no of male = 70
+male(yes) = 60
+male(no) = 10
+
+p (male yes) = p = 60/70
+p (male no ) = q = 10/70
+
+entropy of male = -plog2p -qlog2q
+
+now we have entropy of both sub node(male and female) 
+
+calculate weighted entropy of Gender : 
+
+s(gender) = P(male) * s(male) + p(female) *s(female)
+s(gender) = 70 / 100 * s(male ) + 30/100 * s(female) 
+
+
+IG(Gender) = s(total) - s(gender)
+
+
+
+3. calculate weighted entropy of all sub node in split
+
+4. calculate IG = total entropy - weighted entropy 
+
+
+similarly perform the same to all feature and feature which is having highest IG is best suited for split.
+
+
+------
+
+Gini score : 
+Gini score is even simpler than IG
+
+GS = P square + q square
+
+
+Steps 
+1.calculate Gini score of individual subset ---- male and female
+2.calculate weighted average of gini score ---- gini score of gender
+3. similarl;y do this for all feature and their subnode. 
+
+gini score (feature1 ) > gini score (feature 2) 
+
+then feature 1 is best suited for split
+
+
+
+--------------------
+
+gini impurity = 1- gini score
+
+higher the gini score ------> less is the impurity --------> Data is more homogeneous
+
+gini impurity is also called as gini index
+
+------------------
+
+IMP noted : 
+
+1. if target variable has binary classification , go for both IG and Gini score, and which gives better result use for further analysis
+2. if more than 2 target variable then go for IG only 
+
+-------------------------------------
+-----------------------------------------------
+----------------------------------------------------------------
+---------------------------------------------------------------------------------------
+
+Ensemble of decision tree: 
+
+we know that disadvantage of decision tree is overfitting 
+
+why overfitting : because decision tries to mug up to homogenous classification and uses only 1 dataset for training
+
+technique like pruning and setting maximum depth of tree is used to prevent overfitting as follows 
+
+1. Limit tree depth : the most simple way to prevent overfitting is to limit the maximum depth of tree
+2. pruning : 
+3. cross validation 
+
+4. ensemble methods : Using ensemble method like gradient boosting and random forest can help to reduce overfitting. 
+this methods create multiple decision tree and combine their predictions which help to generalize the model
+
+
+various ensemble techniques as follows :
+
+1.bagging ------- bootstrap + aggregation 
+
+bootstrapping : bootstrapping involve creating a multiple subset from the original dataset. this subset are created randomly by sampling with replacement.
+sampling with replacement is nothing but the subset may contain more than 1 common data points
+
+number of column of subset = number of column of original dataset
+number of rows of subset <= number of rows of original dataset.
+
+original data set contains m column and N rows then 
+subset should contain m columns and n' rows where 
+n'<= n
+
+Aggregation : in bootstrapping we have created multiple subset from the original dataset. now in aggregation we are creating individual decision tree for each subset and combine the prediction of each decision tree by using mean , median , mode 
+
+for categorical values ------> mode
+for numerical values -------> mean
+
+
+IMP Note : 
+higher number of subset are always better
+variance of combine prediction reduce to 1/n of original variance
+
+
+1.1 Random forest : random forest is a special case of bootstrap aggregation or bagging where the subsets are created by random combination of rows and columns both.
+number of column of subset < number of column of original dataset.
+number of rows of subset <= number of rows of original dataset
+
+
+IMP note: 
+1.the subset may contain more than 1 common datapoint in it.
+2.the subset should not contain any common column or feature in it.
+3.Random forest gives better result in case of classification problem rather than regression problem
+
+
+----------------
+
+Boosting or gradient boosting : boosting is an ensemble technique where decision tree learns from the mistake and improve the predictive accuracy of model by reducing error at each iteration. it finds week learner from previous iteration and provide more weightage to week learners in the next iteration and tries to minimize the error.
+ 
+there are many boosting algorithms as follows 
+1. XG boost
+2. Ada boost
+3. light boost
+4. cat boost
+
+XG Boost :- XG boost is a optimized implementation of gradient boosting that enhance performance and speed by allowing parallel computation
+XG boost incorporates regularization techniques to prevent overfitting
+XG boost allows tree to grow till depth and then prune it to improve predictive accuracy of model
+it also automatically handles missing value during training without requiring explicit imputation.
+
+
+----------------------
+
+performance evaluation of D T includes
+
+1.entropy 
+2.IG
+3.GINI score
+4.confusion matrix and its performance measure parameters such as accuracy , precision , recall , f1 score etc
+
+------------------------------------
+--------------------------------------------------------------
+---------------------------------------------------------------------------------------
+
+
+K- Nearest neighbors : - Classification and regression task (KNN also called as lazy learner agorithm)
+
+K nearest neighbors is a supervised learning algorithm used for both classification and regression problems. where task is to classify unknown or unseen datapoint based on nearest datapoints using KNN.
+
+K nearest Neighbors --- classification problem  ---- where it uses majority voting principle to classify the unseen data point
+for example :
+
+if datapoint is surrounded by the 5 datapoints out of which 3 of type A and 2 of type B then the datapoint is classify as a type A class
+
+
+K nearest Regressor --- regression problem  ---- for the regression problem it uses mean or average of the surrounded datapoints to predict the value of unknown or unseen datapoint.
+for example : 
+
+if datapoint is surrounded by 5 datapoints which values are [10,5,7,3,2] then the value of unknown datapoint is average of all the values 
+that is (10+5+7+3+2) / 5 = 5.44
+
+
+The most used or preferred value of K is 5 
+
+to calculate optimum value of K we can use gridserchcv or randomsearchcv
+
+
+IMP : 
+AS the value of K increases the bias increases and variance decreases
+
+
+
+--------------------------------------
+
+---------------------------------------------------------
+
+---------------------------------------------------------------------------------
+
+
+Naive Bayes classifier : Only Classification
+
+1. Naive bayes classifier is a supervised learning algorithm based on bayes theorem 
+2. As the name suggest it is only used for the classification problem.
+3. It is a probabilistic models that predict probability of class labels based on the probabilities of the features given the classes.
+
+
+Bayes theorem :- 
+
+P(A/B) = P(A) * P(B/A) / P(B)
+
+where P(B) not equal to zero 
+
+
+P(label/feature) = P(label) * P(feature/label) / P(feature) 
+
+let say we are calculating the probability of yes label then 
+
+P(label = yes / feature ) = P(label = yes) * P(feature1/label= yes) * P(feature2/label= yes) * P(feature3/label= yes)
+
+
+
+
+
+-------------------------
+-----------------------------------------
+----------------------------------------------------
+-----------------------------------------------------------------------------
+
+
+SUPPORT VECTOR MACHINE : Classification , regression and anomaly detection
+
+1.Support vector machine is a supervised learning algorithm used for both classification and regression problem 
+2.Support vector machine can handle High dimensional and complex data
+3.High-dimensional data refers to datasets where the number of features (or variables) is significantly larger than the number of observations (or samples).
+
+Concept of SVM is to classify the datapoints using a plane called as hyperplane. the hyperplane which is having the maximum (margin) from both side is the best hyperplane
+
+what is margin ? 
+margin is nothing but the distance between hyperplane and nearest data points. 
+when the Line of margin passes through the nearest points then these points are called as support vectors.
+
+Case No 01: when datapoints are radially distributed then we need to increase the dimension from 2D to 3D
+use radial basis function 
+
+RDF : r= e'-(x'2 + y'2)
+where x and y are the co-ordinates of the datapoints
+
+
+Case No 02: when the datapoints are completely mixed in such as case tunning of SVM technique is used.
+In this technique we are softening a margin and allowing some datapoints to cross the Hyperplane
+
+parameter C is used for the tunning of margin
+
+large value of C --------> margin is very hard and datapoints not allowed to cross the hyperplane. in this case we chances of overfitting increases
+
+less value of C ---------> margin is softer and datapoints are allowed to cross the hyperplane. in this case chances of underfitting increases.
+
+
+to calculate optimal value of C , use cross validation and hyperparameter tunning technique such as GridSearchCV 
+
+
+----------------------------------
+-----------------------------------------
+
+--------------------------------------------------------------------
+------------------------------------------------------------------------------------
+
+Neural Network : 
+
+1. Neural network is a supervised learning algorithm used for both classification and regression task 
+2. it is a representation of human brain and essentially made to recognize patterns 
+
+
+Perceptron : perceptron is a functional building block of neural network which contains
+
+1. Input layer: The input layer is the first layer in a neural network. it contains neurons which represents input features. so basically  
+The number of neurons in the input layer equals the number of features in the dataset
+
+2. Neurons : Neurons are the basic computational units of a neural network. They receive inputs (which can be features from the input layer or outputs from previous layers), apply weights and biases, and produce an output through an activation function.
+
+
+3. Activation function : Activation functions allow neural networks to model non-linear relationships between inputs and outputs. Without them, the network would only perform linear transformations, limiting its ability to learn complex patterns in real-world data.
+Activation function applies to output of neuron after computing the weighted sum
+there are various activation functions such as 
+Sigmoid function 
+SoftMax 
+RLU : Rectified linear unit
+ELU : Exponential linear unit
+
+Different activation functions constrain the output of neurons to specific ranges.
+ 
+For example, the sigmoid function outputs values between 0 and 1, making it suitable for binary classification tasks, while the SoftMax function outputs probabilities for multi-class classification
+
+4. Output layer: Output layer contains final Output after the processed information 
+
+
+basically perceptron has only two layers input and output layer along with activation function.
+
+
+
+ Summary : Neuron receive the inputs from input layer , apply weights and bias and produce output through the activation function 
+
+
+Neural network contains number of perceptron in a series
+so data refines number of times according to number of perceptron's 
+
+if 
+number of perceptron's = 1000
+then data refines 1000 times
+weights are also refines 1000 times 
+
+increase accuracy 
+
+
+Working of neural network : 
+
+1. forward propagation : process of going from input layer to output layer
+
+inputs (neurons) -------> Weights and bias term ---------> activation function -----------> Output 
+
+2. Backward propagation : 
+after forward propagation generates an output, the error (loss) is calculated using a predefined loss function.
+apply gradient descent to minimize the loss function or error by changing the weights and the cycle continues till the error goes to minimum possible and then we can calculate final output
+
+
+
+#Artificial Neural network : Similar to perceptron except they have one or more extra layers called as hidden layers. 
+Hidden layer contains the weight matrix. weights are initialize and backpropagation or adjustment of weight happens inside the hidden layer itself.
+
+
+----------------------------------
+
+--------------------------------------------------------
+
+------------------------------------------------------------------------
+
+
+Handling class imbalance : 
+
+Sometimes the dataset contains unequal data of the different classes 
+
+for example 
+
+if the dataset contains 1000 rows then 
+out of 1000 rows 980 data points of class A
+and only 20 data points of Class B 
+
+this is the case of imbalance dataset. training of such dataset is very difficult as there might be chances that they 
+ignored the minority class datapoints
+
+there are various techniques to handle class imbalance
+
+1. Under sampling : 
+
+Randomly removing the samples from the majority class
+The number of samples remove should be equal to number of samples in the minority class
+
+example : 
+if majority class contains 1000 datapoints and minority class contains 5o datapoints then we can remove 50 datapoints from the majority class
+
+due to under sampling there is chances of missing data so underfitting may be happens.
+
+Tomek link technique is used for underfitting. Tomek link is a pair of datapoints of opposite classes which are vary close to each other and removing the datapoint of majority class from each pair
+
+
+ 
+2. Over sampling : 
+
+randomly adding the duplicate samples in the minority class such that Number of majority samples = number of minority samples
+duplicate samples are taking from minority class only.
+
+due to oversampling there is chance of overfitting 
+
+SMOTE Technique is used for oversampling . SMOTE stands for synthetic minority oversampling technique
+it generate synthetic datapoints for minority class. the number of datapoints generated is equal to number of datapoints in the majority class
+
+how datapoints are generated : 
+1. randomly select any data point from minority class 
+2. calculate K nearest neighbors
+3. choose any neighbor and place synthetic data point anywhere in the line joining the point
+
+repeat the process until data is balanced
+
+
+
+-------------------------------
+
+Imp note:
+
+Linear Regression, Logistic Regression, KMeans Clustering, Hierchical Clustering, and Nerual Networks are sensitive to outliers.
+
+Decision Tree, Ensemble of decision trees, Naïve Bayes Classifier, and Support Vector Machine, are not sensitive to outliers.
+
+Handling Outliers is a good practice before passing the data to the ML model as we can get a better model with good metrics.
+
+
+---------------------------------------
+
+----------------------------------------------------------
+
+-----------------------------------------------------------------------------------------
+
+Unsupervised Learning Algorithms :
+
+
+In unsupervised learning , models are learn from unlabeled data where task is to analyze patterns, relationship or structure of data to make predictions or decision.
+
+1. K means Clustering : K means clustering is a type of unsupervised learning algorithm where the datapoints are classified into k different clusters
+where each cluster has same characteristics
+
+Assumption : 
+1. The cluster center is arithmetic mean of all datapoints belong to cluster
+2. each datapoint is closer to its own cluster center than other cluster center
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
